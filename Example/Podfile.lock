@@ -1,0 +1,21 @@
+PODS:
+  - DZBadgeView (0.1.0)
+  - FBSnapshotTestCase (2.1.0):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.0)
+  - FBSnapshotTestCase/Core (2.1.0)
+  - FBSnapshotTestCase/SwiftSupport (2.1.0):
+    - FBSnapshotTestCase/Core
+
+DEPENDENCIES:
+  - DZBadgeView (from `../`)
+  - FBSnapshotTestCase
+
+EXTERNAL SOURCES:
+  DZBadgeView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  DZBadgeView: 44a87e8ec1c5ae7069a364ed9cf734eb309e3484
+  FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
+
+COCOAPODS: 0.39.0
