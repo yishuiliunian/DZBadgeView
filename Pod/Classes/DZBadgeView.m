@@ -38,7 +38,9 @@
 
     [self.layer addSublayer:_roundLayer];
     [self.layer addSublayer:_textLayer];
+    _shrinkToBoundsHeight = YES;
     _yMargin = 0;
+    _maxWidth = 0;
     return self;
 }
 
@@ -81,11 +83,23 @@
     if (CGSizeEqualToSize(_contentSize, CGSizeZero)) {
         [self calTextSize];
     }
+    if (ABS(_maxWidth - 0.001) < 1) {
+        _maxWidth= CGRectGetWidth(self.bounds);
+    }
+    
     CGRect contentRect;
-    _contentSize.width = MAX(_contentSize.width, CGRectGetWidth(self.bounds));
     contentRect.origin.y = 0;
-    contentRect.size.width = _contentSize.width;
-    contentRect.size.height =_contentSize.height;
+
+    if (_shrinkToBoundsHeight) {
+        _contentSize.width = MIN(_contentSize.width, _maxWidth);
+        contentRect.size.width = _contentSize.width;
+        contentRect.size.height =_contentSize.height;
+    } else {
+        contentRect.size.height = self.bounds.size.height;
+        CGFloat width = _contentSize.width - _contentSize.height;
+        width += CGRectGetHeight(contentRect);
+        contentRect.size.width = MIN(width, _maxWidth);
+    }
 
     switch (_alignment) {
         case NSTextAlignmentLeft:
@@ -109,7 +123,7 @@
     }
     _roundLayer.frame = contentRect;
     _roundLayer.cornerRadius = CGRectGetHeight(contentRect)/2;
-    CGRect textRect = CGRectCenterSubSize(contentRect, CGSizeMake(_roundLayer.cornerRadius*2, _yMargin*2));
+    CGRect textRect = CGRectCenterSubSize(contentRect, CGSizeMake(_roundLayer.cornerRadius*2, CGRectGetHeight(contentRect) - _contentSize.height));
     _textLayer.frame = textRect;
 }
 
@@ -125,6 +139,7 @@
     [self calTextSize];
     [self setNeedsLayout];
 }
+
 
 
 @end
