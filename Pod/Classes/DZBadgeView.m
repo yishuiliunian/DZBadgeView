@@ -28,7 +28,7 @@
         return self;
     }
     _roundLayer = [CAShapeLayer new];
-        _textLayer = [CATextLayer new];
+    _textLayer = [CATextLayer new];
     _textLayer.contentsScale = [UIScreen mainScreen].scale;
     _maxWidth = CGFLOAT_MAX;
     _alignment = NSTextAlignmentCenter;
@@ -57,6 +57,7 @@
     if (_badgeColor != badgeColor) {
         _roundLayer.backgroundColor = badgeColor.CGColor;
         _badgeColor = badgeColor;
+        [_roundLayer setNeedsDisplay];
     }
 }
 
