@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.summary          = "DZBadgeView is a badge style view"
 
   s.description      = <<-DESC
-                      badge style view
+                      badge style view, it will used for remind. have fun!
                        DESC
 
   s.homepage         = "https://github.com/yishuiliunian/DZBadgeView"
