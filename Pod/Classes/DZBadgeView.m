@@ -15,6 +15,8 @@
     CGSize _contentSize;
     
     CGFloat _yMargin;
+    
+    CGSize _textSize;
 }
 @end
 
@@ -33,7 +35,7 @@
     _maxWidth = CGFLOAT_MAX;
     _alignment = NSTextAlignmentCenter;
     [self setTextColor:[UIColor whiteColor]];
-    [self setTextFont:[UIFont systemFontOfSize:16]];
+    [self setTextFont:[UIFont systemFontOfSize:12]];
     [self setBadgeColor:[UIColor redColor]];
 
     [self.layer addSublayer:_roundLayer];
@@ -124,13 +126,14 @@
     }
     _roundLayer.frame = contentRect;
     _roundLayer.cornerRadius = CGRectGetHeight(contentRect)/2;
-    CGRect textRect = CGRectCenterSubSize(contentRect, CGSizeMake(_roundLayer.cornerRadius*2, CGRectGetHeight(contentRect) - _contentSize.height));
+    CGRect textRect = CGRectCenter(contentRect, _textSize);
     _textLayer.frame = textRect;
 }
 
 - (void) calTextSize
 {
     _contentSize = [_text sizeWithFont:_textFont constrainedToSize:CGSizeMake(CGFLOAT_MAX, _textFont.pointSize)];
+    _textSize = _contentSize;
     _contentSize.height += _yMargin*2;
     _contentSize.width += _contentSize.height;
 }
