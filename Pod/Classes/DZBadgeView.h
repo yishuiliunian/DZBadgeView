@@ -16,4 +16,5 @@
 @property (nonatomic, strong) UIFont* textFont;
 @property (nonatomic, strong) UIColor* badgeColor;
 @property (nonatomic, assign) BOOL shrinkToBoundsHeight;
+@property (nonatomic, assign) BOOL horiticalCenter;
 @end

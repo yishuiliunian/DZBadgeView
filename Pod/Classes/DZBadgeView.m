@@ -43,6 +43,7 @@
     _shrinkToBoundsHeight = YES;
     _yMargin = 0;
     _maxWidth = 0;
+    _horiticalCenter = NO;
     return self;
 }
 
@@ -93,6 +94,9 @@
     CGRect contentRect;
     contentRect.origin.y = 0;
 
+    if (_horiticalCenter) {
+        contentRect.origin.y = (CGRectGetHeight(self.bounds) - _contentSize.height)/2;
+    }
     if (_shrinkToBoundsHeight) {
         _contentSize.width = MIN(_contentSize.width, _maxWidth);
         contentRect.size.width = _contentSize.width;
@@ -133,9 +137,15 @@
 - (void) calTextSize
 {
     _contentSize = [_text sizeWithFont:_textFont constrainedToSize:CGSizeMake(CGFLOAT_MAX, _textFont.pointSize)];
-    _textSize = _contentSize;
-    _contentSize.height += _yMargin*2;
-    _contentSize.width += _contentSize.height;
+    if (ABS(_contentSize.width - 0) < 1) {
+        _textSize = CGSizeMake(8, 8);
+        _contentSize.height = 10;
+        _contentSize.width = 10;
+    } else {
+        _textSize = _contentSize;
+        _contentSize.height += _yMargin*2;
+        _contentSize.width += _contentSize.height;
+    }
 }
 
 - (void) updateBadgeFrame
