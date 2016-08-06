@@ -148,6 +148,11 @@
     }
 }
 
+- (CGSize) contentSize
+{
+    return _contentSize;
+}
+
 - (void) updateBadgeFrame
 {
     [self calTextSize];

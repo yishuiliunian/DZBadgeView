@@ -17,4 +17,5 @@
 @property (nonatomic, strong) UIColor* badgeColor;
 @property (nonatomic, assign) BOOL shrinkToBoundsHeight;
 @property (nonatomic, assign) BOOL horiticalCenter;
+@property (nonatomic, assign , readonly) CGSize contentSize;
 @end
